@@ -27,7 +27,7 @@
       "properties": {
         "rama-llama-95.url": {
           "type": "string",
-          "default": "http://127.0.0.1:8080",
+          "default": "http://127.0.0.1:8012",
           "description": "OpenAI compatible API endpoint URL"
         }
       }
