@@ -49,16 +49,15 @@ export function activate(context: vscode.ExtensionContext) {
           const controller = new AbortController();
           const signal = controller.signal;
           token.onCancellationRequested(() => {
-            console.log("abort");
             controller.abort();
           });
 
-          const prompt = `<|repo_name|>${projectName}\n<|file_sep|>${fileName}\n<|fim_prefix|>${inputPrefix}<|fim_suffix|>${inputSuffix}<|fim_middle|>`;
+          // const prompt = `<|repo_name|>${projectName}\n<|file_sep|>${fileName}\n<|fim_prefix|>${inputPrefix}<|fim_suffix|>${inputSuffix}<|fim_middle|>`;
 
           const body = {
-            // input_prefix: inputPrefix,
-            // input_suffix: inputSuffix,
-            prompt,
+            input_prefix: inputPrefix,
+            input_suffix: inputSuffix,
+            // prompt,
           };
           const config = vscode.workspace.getConfiguration("rama-llama-95");
           const url = config.get<string>("url");
@@ -68,7 +67,7 @@ export function activate(context: vscode.ExtensionContext) {
             throw new Error(message);
           }
 
-          const response = await fetch(`${url}/completion`, {
+          const response = await fetch(`${url}/infill`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
