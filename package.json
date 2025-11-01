@@ -21,7 +21,17 @@
         "command": "rama-llama-95.helloWorld",
         "title": "Hello World"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Rama Llama 95",
+      "properties": {
+        "rama-llama-95.url": {
+          "type": "string",
+          "default": "http://127.0.0.1:8080/v1",
+          "description": "OpenAI compatible API endpoint URL"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

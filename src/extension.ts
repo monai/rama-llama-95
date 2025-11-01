@@ -60,8 +60,15 @@ export function activate(context: vscode.ExtensionContext) {
             // input_suffix: inputSuffix,
             prompt,
           };
+          const config = vscode.workspace.getConfiguration("rama-llama-95");
+          const url = config.get<string>("url");
+          if (!url) {
+            const message = "No server URL configured";
+            vscode.window.showErrorMessage(message);
+            throw new Error(message);
+          }
 
-          const response = await fetch("http://localhost:10000/completion", {
+          const response = await fetch(`${url}/completion`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
